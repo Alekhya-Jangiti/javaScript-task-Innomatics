@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Basic Logics</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #eaf6ff, #d7ecff);
+            color: #222;
+            min-height: 100vh;
+        }
+
+        header {
+            background: linear-gradient(135deg, #02183f, #0b3d91);
+            color: white;
+            text-align: center;
+            padding: 35px 20px;
+            animation: slideDown 0.8s ease;
+        }
+
+        header h1 {
+            font-size: 34px;
+            margin-bottom: 10px;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 40px auto;
+        }
+
+        .logic-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+        }
+
+        .card {
+            background: white;
+            border: 1px solid #c9e3f7;
+            border-radius: 15px;
+            padding: 25px;
+            height: 380px;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 5px 15px rgba(2, 24, 63, 0.10);
+            animation: fadeUp 0.7s ease both;
+            transition: transform 0.3s ease,
+                        box-shadow 0.3s ease,
+                        border 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 25px rgba(2, 24, 63, 0.18);
+            border: 1px solid #0b3d91;
+        }
+
+        .card h2 {
+            color: #02183f;
+            font-size: 20px;
+            margin-bottom: 20px;
+            line-height: 1.4;
+            min-height: 56px;
+        }
+
+        .input-group {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .input-group.single {
+            grid-template-columns: 1fr;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #b8d5ec;
+            border-radius: 8px;
+            outline: none;
+            font-size: 15px;
+            transition: border 0.3s ease,
+                        box-shadow 0.3s ease;
+        }
+
+        input:focus {
+            border-color: #0b3d91;
+            box-shadow: 0 0 0 3px rgba(11, 61, 145, 0.10);
+        }
+
+        .result {
+            height: 50px;
+            margin-top: 15px;
+            padding: 12px;
+            background: #f5fbff;
+            border-radius: 8px;
+            color: #02183f;
+            font-weight: bold;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .card button {
+            width: 100%;
+            height: 45px;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            background: #0b3d91;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: auto;
+            transition: background 0.3s ease,
+                        transform 0.2s ease;
+        }
+
+        .card button:hover {
+            background: #02183f;
+            transform: scale(1.02);
+        }
+
+        .card:nth-child(1) {
+            animation-delay: 0.1s;
+        }
+
+        .card:nth-child(2) {
+            animation-delay: 0.15s;
+        }
+
+        .card:nth-child(3) {
+            animation-delay: 0.2s;
+        }
+
+        .card:nth-child(4) {
+            animation-delay: 0.25s;
+        }
+
+        .card:nth-child(5) {
+            animation-delay: 0.3s;
+        }
+
+        .card:nth-child(6) {
+            animation-delay: 0.35s;
+        }
+
+        .card:nth-child(7) {
+            animation-delay: 0.4s;
+        }
+
+        .card:nth-child(8) {
+            animation-delay: 0.45s;
+        }
+
+        .card:nth-child(9) {
+            animation-delay: 0.5s;
+        }
+
+        .card:nth-child(10) {
+            animation-delay: 0.55s;
+        }
+
+        .card:nth-child(11) {
+            animation-delay: 0.6s;
+        }
+
+        .card:nth-child(12) {
+            animation-delay: 0.65s;
+        }
+
+        .card:nth-child(13) {
+            animation-delay: 0.7s;
+        }
+
+        .card:nth-child(14) {
+            animation-delay: 0.75s;
+        }
+
+        .card:nth-child(15) {
+            animation-delay: 0.8s;
+        }
+
+        .card:nth-child(16) {
+            animation-delay: 0.85s;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 850px) {
+            .logic-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 550px) {
+            header h1 {
+                font-size: 27px;
+            }
+
+            header p {
+                font-size: 15px;
+            }
+
+            .section-title {
+                font-size: 23px;
+            }
+
+            .input-group {
+                grid-template-columns: 1fr;
+            }
+
+            .card {
+                height: 380px;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>JavaScript Basic Logics</h1>
+    </header>
+
+    <main class="container">
+        <div class="logic-grid">
+
+        
+            <div class="card">
+                <h2>Average of 3 numbers</h2>
+                <div class="input-group">
+                    <input type="number" id="average1" placeholder="Enter number 1">
+                    <input type="number" id="average2" placeholder="Enter number 2">
+                    <input type="number" id="average3" placeholder="Enter number 3">
+                </div>
+                <div class="result" id="averageResult"></div>
+                <button onclick="averageOfThree()">
+                    Calculate Average
+                </button>
+            </div>
+
+
+            <div class="card">
+                <h2>Average of 3 numbers using DOM</h2>
+                <div class="input-group">
+                    <input type="number" id="domAverage1" placeholder="Enter number 1">
+                    <input type="number" id="domAverage2" placeholder="Enter number 2">
+                    <input type="number" id="domAverage3" placeholder="Enter number 3">
+                </div>
+                <div class="result" id="domAverageResult"></div>
+                <button onclick="averageOfThreeDOM()">
+                    Calculate Average
+                </button>
+            </div>
+
+
+            <div class="card">
+                <h2>Sum of first n natural numbers (Without Loop)</h2>
+                <div class="input-group single">
+                    <input type="number" id="sumN" placeholder="Enter n">
+                </div>
+                <div clas="result" id="sumResult"></div>
+                <button onclick="sumNatural()">
+                    Calculate Sum
+                </button>
+            </div>
+
+
+            <div class="card">
+                <h2>Average of first n natural numbers (Without Loop)</h2>
+                <div class="input-group single">
+                    <input type="number" id="averageN" placeholder="Enter n">
+                </div>
+                <div class="result" id="averageNaturalResult"></div>
+                <button onclick="averageNatural()">
+                    Calculate Average
+                </button>
+            </div>
+
+
+            <div class="card">
+                <h2>Profit percentage</h2>
+                <div class="input-group">
+                    <input type="number" id="costPrice" placeholder="Cost Price">
+                    <input type="number" id="sellingPrice" placeholder="Selling Price">
+                </div>
+                <div class="result" id="profitResult"></div>
+                <button onclick="profitPercentage()">
+                    Calculate Profit
+                </button>
+            </div>
+
+
+            <div class="card">
+                <h2>Simple Interest</h2>
+                <div class="input-group">
+                    <input type="number" id="principal" placeholder="Principal">
+                    <input type="number" id="rate" placeholder="Rate">
+                    <input type="number" id="time" placeholder="Time">
+                </div>
+                <div class="result" id="interestResult"></div>
+                <button onclick="simpleInterest()">
+                    Calculate Interest
+                </button>
+            </div>
+
+
+            <div class="card">
+                <h2>Missing angle of a triangle</h2>
+                <div class="input-group">
+                    <input type="number" id="angle1" placeholder="Angle 1">
+                    <input type="number" id="angle2" placeholder="Angle 2">
+                </div>
+                <div class="result" id="angleResult"></div>
+                <button onclick="missingAngle()">
+                    Find Missing Angle
+                </button>
+            </div>
+
+
+            <div class="card">
+                <h2>Last digit of a number</h2>
+                <div class="input-group single">
+                    <input type="number" id="lastDigitNumber" placeholder="Enter number">
+                </div>
+                <div class="result" id="lastDigitResult"></div>
+                <button onclick="lastDigit()">
+                    Find Last Digit
+                </button>
+            </div>
+
+
+            <div class="card">
+                <h2>Remove last digit of a number</h2>
+                <div class="input-group single">
+                    <input type="number" id="removeDigitNumber" placeholder="Enter number">
+                </div>
+                <div class="result" id="removeDigitResult"></div>
+                <button onclick="removeLastDigit()">
+                    Remove Last Digit
+                </button>
+            </div>
+
+
+            <div class="card">
+                <h2>First digit of a 3-digit number</h2>
+                <div class="input-group single">
+                    <input type="number" id="threeDigitNumber" placeholder="Enter 3-digit number">
+                </div>
+                <div class="result" id="threeDigitResult"></div>
+                <button onclick="firstDigitThree()">
+                    Find First Digit
+                </button>
+            </div>
+
+
+            <div class="card">
+                <h2>First digit of a 5-digit number</h2>
+                <div class="input-group single">
+                    <input type="number" id="fiveDigitNumber" placeholder="Enter 5-digit number">
+                </div>
+                <div class="result" id="fiveDigitResult"></div>
+                <button onclick="firstDigitFive()">
+                    Find First Digit
+                </button>
+            </div>
+
+
+            <div class="card">
+                <h2>Celsius → Fahrenheit</h2>
+                <div class="input-group single">
+                    <input type="number" id="celsius" placeholder="Enter Celsius">
+                </div>
+                <div class="result" id="celsiusResult"></div>
+                <button onclick="celsiusToFahrenheit()">
+                    Convert
+                </button>
+            </div>
+
+
+            <div class="card">
+                <h2>Fahrenheit → Celsius</h2>
+                <div class="input-group single">
+                    <input type="number" id="fahrenheit" placeholder="Enter Fahrenheit">
+                </div>
+                <div class="result" id="fahrenheitResult"></div>
+                <button onclick="fahrenheitToCelsius()">
+                    Convert
+                </button>
+            </div>
+
+
+            <div class="card">
+                <h2>Gross salary using Basic Salary, HRA & DA</h2>
+                <div class="input-group">
+                    <input type="number" id="basicSalary" placeholder="Basic Salary">
+                    <input type="number" id="hra" placeholder="HRA">
+                    <input type="number" id="da" placeholder="DA">
+                </div>
+                <div class="result" id="salaryResult"></div>
+                <button onclick="grossSalary()">
+                    Calculate Gross Salary
+                </button>
+            </div>
+
+
+            <div class="card">
+                <h2>Swap two numbers using a third variable</h2>
+                <div class="input-group">
+                    <input type="number" id="swapA" placeholder="Enter A">
+                    <input type="number" id="swapB" placeholder="Enter B">
+                </div>
+                <div class="result" id="swapResult"></div>
+                <button onclick="swapUsingThird()">
+                    Swap Numbers
+                </button>
+            </div>
+
+
+            <div class="card">
+                <h2>Swap two numbers without using a third variable</h2>
+                <div class="input-group">
+                    <input type="number" id="swapX" placeholder="Enter X">
+                    <input type="number" id="swapY" placeholder="Enter Y">
+                </div>
+                <div class="result" id="swapWithoutResult"></div>
+                <button onclick="swapWithoutThird()">
+                    Swap Numbers
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <script src="basicLogics.js"></script>
+
+</body>
+</html>
+
